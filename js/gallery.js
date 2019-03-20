@@ -43,20 +43,23 @@ function swapPhoto() {
 // Counter for the mImages array
 var mCurrentIndex = 0;
 
-// XMLHttpRequest variable
-var mRequest = new XMLHttpRequest();
+function callXML() {
+	// XMLHttpRequest variable
+	var mRequest = new XMLHttpRequest();
 
-var file = "images.json"; /** File locaiton of images.json **/
-mRequest.onreadystatechange = function() { /** Execute function when request is ready **/
-    if ( mRequest.readyState == 4 && mRequest.status == 200 ) { /** Check if readyState = 4 and status = 200 **/
-    console.log(data);
-    var data = JSON.parse(mRequest.responseText); /** Parse the JSON file from the mRequest and store in variable **/
-    organizeData(data); /** Call function that will do another task and pass the parsed data **/
-    }
-    mRequest.open("GET", file,true);
-    mRequest.send();
+	var file = "images.json"; /** File locaiton of images.json **/
+
+	mRequest.onreadystatechange = function() { /** Execute function when request is ready **/
+		if ( mRequest.readyState == 4 && mRequest.status == 200 ) { /** Check if readyState = 4 and status = 200 **/
+			var data = JSON.parse(mRequest.responseText); /** Parse the JSON file from the mRequest and store in variable **/
+			console.log(data);
+			/** organizeData(data); **/ /** Call function that will do another task and pass the parsed data **/
+		}
+		mRequest.open("GET", file,true);
+		mRequest.send();
+	}
+
 }
-
 
 
 function organizeData(data) {
