@@ -46,6 +46,23 @@ var mCurrentIndex = 0;
 // XMLHttpRequest variable
 var mRequest = new XMLHttpRequest();
 
+var file = "images.json"; /** File locaiton of images.json **/
+mRequest.onreadystatechange = function() { /** Execute function when request is ready **/
+    if ( mRequest.readyState == 4 && mRequest.status == 200 ) { /** Check if readyState = 4 and status = 200 **/
+    console.log(data);
+    var data = JSON.parse(mRequest.responseText); /** Parse the JSON file from the mRequest and store in variable **/
+    organizeData(data); /** Call function that will do another task and pass the parsed data **/
+    }
+    mRequest.open("GET", file,true);
+    mRequest.send();
+}
+
+
+
+function organizeData(data) {
+    console.log(data);
+}
+
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
@@ -67,10 +84,10 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 }
 
 $(document).ready( function() {
-	
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-	
+
+
 });
 
 window.addEventListener('load', function() {
@@ -84,5 +101,5 @@ function GalleryImage() {
 	this.desc = '';
 	this.dte = '';
 	this.img = '';
-	
+
 }
