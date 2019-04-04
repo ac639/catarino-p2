@@ -76,12 +76,12 @@ var mCurrentIndex = 0;
 	mRequest.send();
 
 function organizeData(data) {
-    console.log(data);
+    console.log(data); /** Log the array for testing purposes **/
 
-	data.images.forEach((item) => {
-		Object.entries(item).forEach(([key, val]) => {
+	data.images.forEach((item) => { /** Start the loop to iterate the images array in the json parsed data **/
+		Object.entries(item).forEach(([key, val]) => { /** Iterate for each key val pair **/
 			//console.log(`${JSON.stringify(val)}`);
-			console.log(`${key}-${JSON.stringify(val)}`);
+			console.log(`${key}-${JSON.stringify(val)}`); /**Print out the key and print out the val as string for testing purposes**/
 		});
 	});
 }
