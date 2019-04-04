@@ -61,13 +61,13 @@ var mCurrentIndex = 0;
 			try {
 				var data = JSON.parse(mRequest.responseText);
 				/** Parse the JSON file from the mRequest and store in variable **/
-				console.log(data);
+				//console.log(data);
 
 			} catch (err) {
 				console.log(err.message);
 			}
 
-			/** organizeData(data); **/ /** Call function that will do another task and pass the parsed data **/
+			organizeData(data); /** Call function that will do another task and pass the parsed data **/
 
 		}
 
@@ -77,6 +77,13 @@ var mCurrentIndex = 0;
 
 function organizeData(data) {
     console.log(data);
+
+	data.images.forEach((item) => {
+		Object.entries(item).forEach(([key, val]) => {
+			//console.log(`${JSON.stringify(val)}`);
+			console.log(`${key}-${JSON.stringify(val)}`);
+		});
+	});
 }
 
 // Array holding GalleryImage objects (see below).
