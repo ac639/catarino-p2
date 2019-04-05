@@ -75,19 +75,27 @@ var mCurrentIndex = 0;
 	mRequest.open("GET", file,true);
 	mRequest.send();
 
+// Array holding GalleryImage objects (see below).
+var mImages = [];
+
 function organizeData(data) {
     console.log(data); /** Log the array for testing purposes **/
 
-	data.images.forEach((item) => { /** Start the loop to iterate the images array in the json parsed data **/
-		Object.entries(item).forEach(([key, val]) => { /** Iterate for each key val pair **/
+	for(var i = 0; i < data.images.length; i++)
+	{	/** Will iterate data json parsed array and push each value of the key into a GalleryImage object **/
+		mImages.push(new GalleryImage(data.images[i].imglocation, data.images[i].description, data.images[i].date, data.images[i].imgPath));
+		console.log(GalleryImage);
+	}
+
+	//data.images.forEach((item) => { /** Start the loop to iterate the images array in the json parsed data **/
+		//Object.entries(item).forEach(([key, val]) => { /** Iterate for each key val pair **/
 			//console.log(`${JSON.stringify(val)}`);
-			console.log(`${key}-${JSON.stringify(val)}`); /**Print out the key and print out the val as string for testing purposes**/
-		});
-	});
+			//console.log(`${key}-${JSON.stringify(val)}`); /**Print out the key and print out the val as string for testing purposes**/
+
+		//});
+	//});
 }
 
-// Array holding GalleryImage objects (see below).
-var mImages = [];
 
 // Holds the retrived JSON information
 var mJson;
@@ -119,10 +127,10 @@ window.addEventListener('load', function() {
 
 }, false);
 
-function GalleryImage() {
-	this.location = '';
-	this.desc = '';
-	this.dte = '';
-	this.img = '';
+function GalleryImage(imgLocation, description, date, imgPath) {
+	this.location = 'imgLocation';
+	this.desc = 'description';
+	this.dte = 'date';
+	this.img = 'imgPath';
 
 }
