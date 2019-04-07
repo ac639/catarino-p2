@@ -1,15 +1,15 @@
 // requestAnim shim layer by Paul Irish
-    window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       || 
-              window.webkitRequestAnimationFrame || 
-              window.mozRequestAnimationFrame    || 
-              window.oRequestAnimationFrame      || 
-              window.msRequestAnimationFrame     || 
-              function(/* function */ callback, /* DOMElement */ element){
-                window.setTimeout(callback, 1000 / 60);
-              };
-    })();
-  
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame       ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame    ||
+		window.oRequestAnimationFrame      ||
+		window.msRequestAnimationFrame     ||
+		function(/* function */ callback, /* DOMElement */ element){
+			window.setTimeout(callback, 1000 / 60);
+		};
+})();
+
 
 // example code from mr doob : http://mrdoob.com/lab/javascript/requestanimationframe/
 
@@ -18,7 +18,7 @@ animate();
 var mLastFrameTime = 0;
 var mWaitTime = 5000; //time in ms
 function animate() {
-    requestAnimFrame( animate );
+	requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
 	if (mLastFrameTime === 0) {
 		mLastFrameTime = currentTime;
@@ -35,13 +35,10 @@ function animate() {
 function swapPhoto() {
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
-	//with a new image from your images array which is loaded 
+	//with a new image from your images array which is loaded
 	//from the JSON string
 	console.log('swap photo');
 }
-
-
-
 
 
 
@@ -49,51 +46,56 @@ function swapPhoto() {
 var mCurrentIndex = 0;
 
 
-	// XMLHttpRequest variable
-	var mRequest = new XMLHttpRequest();
+// XMLHttpRequest variable
+var mRequest = new XMLHttpRequest();
 
-	var file = "images.json"; /** File locaiton of images.json **/
+var file = "images.json"; /** File locaiton of images.json **/
 
-	mRequest.onreadystatechange = function() {
-		/** Execute function when request is ready **/
-		console.log('Called');
-		if (mRequest.readyState == 4 && mRequest.status == 200) { /** Check if readyState = 4 and status = 200 **/
-			try {
-				var data = JSON.parse(mRequest.responseText);
-				/** Parse the JSON file from the mRequest and store in variable **/
-				//console.log(data);
+mRequest.onreadystatechange = function() {
+	/** Execute function when request is ready **/
+	console.log('Called');
+	if (mRequest.readyState == 4 && mRequest.status == 200) { /** Check if readyState = 4 and status = 200 **/
+		try {
+			var data = JSON.parse(mRequest.responseText);
+			/** Parse the JSON file from the mRequest and store in variable **/
+			//console.log(data);
 
-			} catch (err) {
-				console.log(err.message);
-			}
-
-			organizeData(data); /** Call function that will do another task and pass the parsed data **/
-
+		} catch (err) {
+			console.log(err.message);
 		}
 
+		organizeData(data); /** Call function that will do another task and pass the parsed data **/
+
 	}
-	mRequest.open("GET", file,true);
-	mRequest.send();
+
+}
+mRequest.open("GET", file,true);
+mRequest.send();
+
+
+// Function/Object that stores the gallery image variables from JSON file
+//This object is used by organizeData() function
+function GalleryImage(imgLocation, description, date, imgPath){
+	this.imgLocation = imgLocation;
+	this.description = description;
+	this.date = date;
+	this.imgPath = imgPath;
+}
+
 
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
 function organizeData(data) {
-    console.log(data); /** Log the array for testing purposes **/
+	//console.log(data); /** Log the array for testing purposes **/
 
-	for(var i = 0; i < data.images.length; i++)
-	{	/** Will iterate data json parsed array and push each value of the key into a GalleryImage object **/
-		mImages.push(new GalleryImage(data.images[i].imglocation, data.images[i].description, data.images[i].date, data.images[i].imgPath));
-		console.log(GalleryImage);
+	for(var i = 0; i < data.images.length; i++) {	/** Will iterate data json parsed array and push each value of the key into a GalleryImage object **/
+	     //mImages.push(new GalleryImage(data.images[i].imgLocation, data.images[i].description, data.images[i].date, data.images[i].imgPath));
+		mImages.push( new GalleryImage(data.images[i].imgLocation, data.images[i].description, data.images[i].date, data.images[i].imgPath) );
+		//console.log(data.images[i].imgLocation);
 	}
+	console.log(mImages);
 
-	//data.images.forEach((item) => { /** Start the loop to iterate the images array in the json parsed data **/
-		//Object.entries(item).forEach(([key, val]) => { /** Iterate for each key val pair **/
-			//console.log(`${JSON.stringify(val)}`);
-			//console.log(`${key}-${JSON.stringify(val)}`); /**Print out the key and print out the val as string for testing purposes**/
-
-		//});
-	//});
 }
 
 
@@ -122,15 +124,8 @@ $(document).ready( function() {
 });
 
 window.addEventListener('load', function() {
-	
+
 	console.log('window loaded');
 
 }, false);
 
-function GalleryImage(imgLocation, description, date, imgPath) {
-	this.location = 'imgLocation';
-	this.desc = 'description';
-	this.dte = 'date';
-	this.img = 'imgPath';
-
-}
