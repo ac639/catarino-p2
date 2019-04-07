@@ -32,31 +32,51 @@ function animate() {
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
+// Counter for the mImages array
+var mCurrentIndex = 0;
+
+// XMLHttpRequest variable
+var mRequest = new XMLHttpRequest();
+
+// file for images.json
+var file = "images.json"; /** File locaiton of images.json **/
+
+// Holds the retrieved JSON information
+var data;
+
+// Array holding GalleryImage objects (see below).
+var mImages = [];
+
+// URL for the JSON to load by default
+// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
+var mUrl = 'insert_url_here_to_image_json';
+
+
 function swapPhoto() {
-	//Add code here to access the #slideShow element.
-	//Access the img element and replace its source
-	//with a new image from your images array which is loaded
-	//from the JSON string
+	//if the index number is less than the number of images in mImages then proceed
+	if (mCurrentIndex < mImages.length )  {
+		$('#photo').attr('src', mImages[mCurrentIndex].imgPath);
+		mCurrentIndex += 1; //Add a 1 to get the next image in the mImages array
+	} else if (mCurrentIndex == mImages.length) {
+		//if the index number has reached the amount of images in mImages array, then start over by setting to 0
+		mCurrentIndex = 0;
+	}
+
+
 	console.log('swap photo');
 }
 
 
 
-// Counter for the mImages array
-var mCurrentIndex = 0;
 
 
-// XMLHttpRequest variable
-var mRequest = new XMLHttpRequest();
-
-var file = "images.json"; /** File locaiton of images.json **/
 
 mRequest.onreadystatechange = function() {
 	/** Execute function when request is ready **/
 	console.log('Called');
 	if (mRequest.readyState == 4 && mRequest.status == 200) { /** Check if readyState = 4 and status = 200 **/
 		try {
-			var data = JSON.parse(mRequest.responseText);
+			data = JSON.parse(mRequest.responseText);
 			/** Parse the JSON file from the mRequest and store in variable **/
 			//console.log(data);
 
@@ -83,14 +103,10 @@ function GalleryImage(imgLocation, description, date, imgPath){
 }
 
 
-// Array holding GalleryImage objects (see below).
-var mImages = [];
-
 function organizeData(data) {
 	//console.log(data); /** Log the array for testing purposes **/
 
 	for(var i = 0; i < data.images.length; i++) {	/** Will iterate data json parsed array and push each value of the key into a GalleryImage object **/
-	     //mImages.push(new GalleryImage(data.images[i].imgLocation, data.images[i].description, data.images[i].date, data.images[i].imgPath));
 		mImages.push( new GalleryImage(data.images[i].imgLocation, data.images[i].description, data.images[i].date, data.images[i].imgPath) );
 		//console.log(data.images[i].imgLocation);
 	}
@@ -98,13 +114,6 @@ function organizeData(data) {
 
 }
 
-
-// Holds the retrived JSON information
-var mJson;
-
-// URL for the JSON to load by default
-// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'insert_url_here_to_image_json';
 
 
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
