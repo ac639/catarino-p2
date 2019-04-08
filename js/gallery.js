@@ -55,9 +55,9 @@ var mUrl = 'insert_url_here_to_image_json';
 function swapPhoto() {
 	//if the index number is less than the number of images in mImages then proceed
 	if (mCurrentIndex < mImages.length )  {
-		$('.location').attr('src', mImages[mCurrentIndex].imgLocation); //Set the location from the mImages array
-		$('.description').attr('src', mImages[mCurrentIndex].description); //Set the desc. from mImages
-		$('.date').attr('src', mImages[mCurrentIndex].date); //Set the date from mImages
+		$('.location').text("Location: " + mImages[mCurrentIndex].imgLocation); //Set the location from the mImages array
+		$('.description').text("Description: " + mImages[mCurrentIndex].description); //Set the desc. from mImages
+		$('.date').text('Date: ' + mImages[mCurrentIndex].date); //Set the date from mImages
 		$('#photo').attr('src', mImages[mCurrentIndex].imgPath); //Set the image path/location from mImages, ID not class
 
 
