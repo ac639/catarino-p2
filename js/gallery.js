@@ -134,7 +134,7 @@ $(document).ready( function() {
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
 
-	$(".moreIndicator").click(function(){
+	$(".moreIndicator").click(function(){ //Click function that rotates button and toggles fade
 		if ( $(".moreIndicator").hasClass("rot270") ) {
 			$(".moreIndicator").addClass( "rot90" );
 			$(".moreIndicator").removeClass("rot270");
@@ -144,11 +144,27 @@ $(document).ready( function() {
 			$(".moreIndicator").addClass("rot270");
             $( ".details" ).fadeToggle("fast");
 		}
-
-
-
 	});
 
+	//OFFSET FOR NEXT PHOTO ARROW
+	//$('#nextPhoto').offset({ left: 0 });
+	//$('#prevPhoto').offset({ left: 0 });
+
+	//OPACITY HOVER FOR NEXTPHOTO
+	$("#nextPhoto").hover(function() {
+		$(this).css("opacity",0.8);
+	});
+	$( "#nextPhoto" ).mouseleave(function() {
+		$(this).css("opacity",1);
+	});
+
+	//OPACITY HOVER FOR PREVPHOTO
+	$("#prevPhoto").hover(function() {
+		$(this).css("opacity",0.8);
+	});
+	$( "#prevPhoto" ).mouseleave(function() {
+		$(this).css("opacity",1);
+	});
 
 });
 
