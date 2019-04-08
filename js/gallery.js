@@ -138,9 +138,11 @@ $(document).ready( function() {
 		if ( $(".moreIndicator").hasClass("rot270") ) {
 			$(".moreIndicator").addClass( "rot90" );
 			$(".moreIndicator").removeClass("rot270");
+            $( ".details" ).fadeToggle("fast");
 
 		} else {
 			$(".moreIndicator").addClass("rot270");
+            $( ".details" ).fadeToggle("fast");
 		}
 
 
