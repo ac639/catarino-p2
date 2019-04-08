@@ -1,0 +1,34 @@
+{
+    "images": [
+        {
+            "imgPath": "img/extras/1.png",
+            "imgLocation": "Bike",
+            "description": "KTM 125",
+            "date": "01/01/2016"
+        },
+        {
+            "imgPath": "img/extras/2.jpg",
+            "imgLocation": "Bike",
+            "description": "KTM 390",
+            "date": "01/02/2016"
+        },
+        {
+            "imgPath": "img/extras/3.jpg",
+            "imgLocation": "Bike",
+            "description": "MT-15",
+            "date": "01/03/2016"
+        },
+        {
+            "imgPath": "img/extras/4.jpg",
+            "imgLocation": "Bike",
+            "description": "BMW R1200S",
+            "date": "01/04/2016"
+        },
+        {
+            "imgPath": "img/extras/5.jpg",
+            "imgLocation": "Bike",
+            "description": "Honda Monkey",
+            "date": "01/05/2016"
+        }
+  ]
+}
