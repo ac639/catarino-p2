@@ -49,8 +49,36 @@ var mImages = [];
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'insert_url_here_to_image_json';
+var mUrl;
 
+//FUNCTION TO GET THE JSON PARAMETER FROM URL
+function getUrlVars()
+{
+	var vars = [], hash;
+	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	for(var i = 0; i < hashes.length; i++)
+	{
+		hash = hashes[i].split('=');
+		vars.push(hash[0]);
+		vars[hash[0]] = hash[1];
+	}
+	//console.log(vars);
+	return vars;
+
+}
+
+//Create a variable handler $_GET to look for the value for ?json parameter
+var $_GET = getUrlVars()["json"];
+
+//If no ?json= was supplied, default to images.json
+if ($_GET == undefined || $_GET == null){
+	mUrl = "images.json";
+	//console.log(mUrl);
+} else { //if a parameter was supplied, use that one instead
+	var mUrl = getUrlVars()["json"];
+	//console.log(mUrl);
+
+}
 
 function swapPhoto() {
 	//if the index number is less than the number of images in mImages then proceed
@@ -93,7 +121,7 @@ mRequest.onreadystatechange = function() {
 	}
 
 }
-mRequest.open("GET", file,true);
+mRequest.open("GET", mUrl,true);
 mRequest.send();
 
 
