@@ -134,6 +134,19 @@ $(document).ready( function() {
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
 
+	$(".moreIndicator").click(function(){
+		if ( $(".moreIndicator").hasClass("rot270") ) {
+			$(".moreIndicator").addClass( "rot90" );
+			$(".moreIndicator").removeClass("rot270");
+
+		} else {
+			$(".moreIndicator").addClass("rot270");
+		}
+
+
+
+	});
+
 
 });
 
