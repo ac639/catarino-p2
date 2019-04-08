@@ -208,13 +208,19 @@ $(document).ready( function() {
 
 	//CLICK HANDLER FOR PREVPHOTO BUTTON
 	$("#prevPhoto").click(function(){
-		if ( mCurrentIndex == 1) { //If on the first photo,
-			mCurrentIndex = 0;
+		if ( mCurrentIndex == 0) { //If on the first photo,
+			mCurrentIndex = mImages.length;
+			//console.log('mCurrentIndex is 0');
+			//console.log(mCurrentIndex);
+			mCurrentIndex = mCurrentIndex - 1;
 			swapPhoto();
-			//If the loop just started such as on the first photo, pressing should bring it to the very last photo of the array
-		}
-
-		else if (mCurrentIndex - 2 >= 0) {
+		} else if (mCurrentIndex == 1) {
+			mCurrentIndex = 0;
+			mCurrentIndex = mImages.length;
+			//console.log('mCurrentIndex is 1');
+			mCurrentIndex = mCurrentIndex - 1;
+			swapPhoto();
+		} else if (mCurrentIndex - 2 >= 0) {
 			mCurrentIndex = mCurrentIndex - 2; //Need to subtract 2 because swapPhoto adds 1
 			swapPhoto();
 			//If not at the first image just go back one
