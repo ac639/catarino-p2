@@ -60,7 +60,6 @@ function swapPhoto() {
 		$('.date').text('Date: ' + mImages[mCurrentIndex].date); //Set the date from mImages
 		$('#photo').attr('src', mImages[mCurrentIndex].imgPath); //Set the image path/location from mImages, ID not class
 
-
 		mCurrentIndex += 1; //Add a 1 to get the next image in the mImages array
 	} else if (mCurrentIndex == mImages.length) {
 		//if the index number has reached the amount of images in mImages array, then start over by setting to 0
@@ -164,6 +163,35 @@ $(document).ready( function() {
 	});
 	$( "#prevPhoto" ).mouseleave(function() {
 		$(this).css("opacity",1);
+	});
+
+	//CLICK HANDLER FOR NEXTPHOTO BUTTON
+	$("#nextPhoto").click(function(){
+		if ( mCurrentIndex == mImages.length) {
+			mCurrentIndex = 0;
+			swapPhoto();
+			//If the entire image array has been looped, set to 0 and start over
+		} else {
+			swapPhoto();
+			//If not at the last image, just go to the next one
+		}
+
+	});
+
+	//CLICK HANDLER FOR PREVPHOTO BUTTON
+	$("#prevPhoto").click(function(){
+		if ( mCurrentIndex == 1) { //If on the first photo,
+			mCurrentIndex = 0;
+			swapPhoto();
+			//If the loop just started such as on the first photo, pressing should bring it to the very last photo of the array
+		}
+
+		else if (mCurrentIndex - 2 >= 0) {
+			mCurrentIndex = mCurrentIndex - 2; //Need to subtract 2 because swapPhoto adds 1
+			swapPhoto();
+			//If not at the first image just go back one
+		}
+
 	});
 
 });
